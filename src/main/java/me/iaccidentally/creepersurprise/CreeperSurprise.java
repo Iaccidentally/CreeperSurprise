@@ -59,8 +59,8 @@ public class CreeperSurprise extends JavaPlugin implements Listener
 				builder.with(FireworkEffect.Type.CREEPER);
 				builder.withColor(org.bukkit.Color.LIME);
 				builder.withFade(org.bukkit.Color.GREEN);
-				builder.withTrail();
-				builder.withFlicker();
+				builder.trail(trail());
+				builder.flicker(flicker());
 				FireworkEffect effect = builder.build();
 				meta.addEffect(effect);
 				meta.setPower(power());
@@ -73,5 +73,15 @@ public class CreeperSurprise extends JavaPlugin implements Listener
 	{
 		int power = 0 + (int)(Math.random() * ((getConfig().getInt("power") - 0) + 1));
 		return power;
+	}
+	public boolean trail()
+	{
+		boolean trail = getConfig().getBoolean("trail");
+		return trail;
+	}
+	public boolean flicker()
+	{
+		boolean flicker = getConfig().getBoolean("flicker");
+		return flicker;
 	}
 }
