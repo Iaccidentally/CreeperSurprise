@@ -1,0 +1,5 @@
+name: Creepersurprise
+main: me.iaccidentally.creepersurprise.CreeperSurprise
+version: 1.0
+authors: [Iaccidentally, Zarubinator]
+description: Creepersurprise plugin for bukkit
