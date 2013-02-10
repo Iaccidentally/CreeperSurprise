@@ -3,3 +3,8 @@
 power: 4
 trail: true
 flicker: true
+effect ball: false
+effect large_ball: false
+effect burst: false
+effect creeper: true
+effect star: false
