@@ -1,5 +1,6 @@
 package me.iaccidentally.creepersurprise;
 
+import java.io.File;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.FireworkEffect;
@@ -12,7 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
+//import org.bukkit.util.Vector;
 
 
 public class CreeperSurprise extends JavaPlugin implements Listener
@@ -24,6 +25,11 @@ public class CreeperSurprise extends JavaPlugin implements Listener
 	public void onEnable()
 	{
 		Bukkit.getServer().getPluginManager().registerEvents(this, this);
+		if (!new File(getDataFolder(), "config.yml").exists())
+		{
+			log.info("[CreeperSurprise] Config file generated!");
+			saveDefaultConfig();
+		}
 		log.info("[CreeperSurprise] enabled!");
 	}
 
@@ -46,7 +52,7 @@ public class CreeperSurprise extends JavaPlugin implements Listener
 			for (int i = 0; i < 10; i++)
 			{
 				//final Vector vector = event.getEntity().getLocation().getDirection().setY(i * 0.50);
-				int r = 0 + (int)(Math.random() * ((4 - 0) + 1));
+				
 				Firework firework = (Firework)event.getLocation().getWorld().spawnEntity(event.getLocation(), EntityType.FIREWORK);
 				FireworkMeta meta = (FireworkMeta)firework.getFireworkMeta();
 				builder = FireworkEffect.builder();
@@ -57,10 +63,15 @@ public class CreeperSurprise extends JavaPlugin implements Listener
 				builder.withFlicker();
 				FireworkEffect effect = builder.build();
 				meta.addEffect(effect);
-				meta.setPower(r);
+				meta.setPower(power());
 				//firework.setVelocity(vector);
 				firework.setFireworkMeta(meta);
 			}
 		}
+	}
+	public int power()
+	{
+		int power = 0 + (int)(Math.random() * ((getConfig().getInt("power") - 0) + 1));
+		return power;
 	}
 }
