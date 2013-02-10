@@ -1,3 +1,5 @@
 #Do not use tabs in this file, or it will not work.
 #The max power for the fireworks. Note: cannot be less than 0 or greater than 128
 power: 4
+trail: true
+flicker: true
